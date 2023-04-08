@@ -10,7 +10,7 @@ namespace AspWebapp2
 {
     public partial class _Default : Page
     {
-        string connectionString = @"Data Source= 127.0.0.1; Initial Catalog= test-mh; User=sa; Password=Ahal1234!";
+        string connectionString = @"Data Source=YourServerName;Initial Catalog=YourDatabaseName;User ID=YourUserName;Password=YourPassword;";
         string select_query = @"SELECT s.name as [Name] , cr.course_name as [Courese Name], cr.course_instructor as [Instructor], cr.credit as [Course Credit], s.about as [About Student] FROM student s JOIN course cr ON s.course_id = cr.ID;";
         string insert_query = @"INSERT INTO student (ID, name, age, about, course_id) VALUES (@ID, @Name, @Age, @About, @Course_id);";
         string update_query = @"";
