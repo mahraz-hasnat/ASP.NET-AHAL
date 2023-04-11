@@ -7,7 +7,7 @@ namespace WebApplication2
 {
     public class Class1
     {
-        string _connectionString = @"Data Source=127.0.0.1;Initial Catalog=test-mh;User ID=sa;Password=Ahal1234!;";
+        string _connectionString = @"Data Source=127.0.0.1;Initial Catalog=test-mh;User ID=sa;Password=YourPassword;";
         //string _selectQuery = @"SELECT s.ID,  s.name as [Name] , cr.course_name as [Courese Name], cr.course_instructor as [Instructor], cr.credit as [Course Credit], s.about as [About Student] FROM student s JOIN course cr ON s.course_id = cr.ID;";
         string _saveData = @"INSERT INTO student (ID, name, age, about, course_id) VALUES (@ID, @Name, @Age, @About, @Course_id);";
         string _updateStudent = @"UPDATE student SET name=@Name, age=@Age, about=@About, course_id=@Course_id WHERE ID = @ID;";
