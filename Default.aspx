@@ -1,61 +1,67 @@
-using System;
-using System.Data;
-using System.Web.UI;
+<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="WebApplication2._Default" %>
 
-namespace WebApplication2
-{
-    public partial class _Default : Page
-    {
-        string _selectQuery = @"SELECT s.ID,  s.name as [Name] , cr.course_name as [Courese Name], cr.course_instructor as [Instructor], cr.credit as [Course Credit], s.about as [About Student] FROM student s JOIN course cr ON s.course_id = cr.ID;";
+<asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
-        protected void Page_Load(object sender, EventArgs e)
-        {
-            if (!IsPostBack)
-            {               
-                BindGrid();                
-            }
-        }
+    <div>
 
-        protected void BindGrid()
-        {
-            Class1 load = new Class1();
-            DataTable dt = load.LoadData(_selectQuery);
-            GridView1.DataSource = dt;
-            GridView1.DataBind();
-        }
+        <table style="width: 100%; border-collapse: collapse">
+            <tr>
+                <td style="width: 235px">&nbsp;</td>
+                <td style="width: 248px">Student ID</td>
+                <td>
+                    <asp:TextBox ID="textID" runat="server" Width="272px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 235px">&nbsp;</td>
+                <td style="width: 248px">Name</td>
+                <td>
+                    <asp:TextBox ID="textName" runat="server" Width="272px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 235px">&nbsp;</td>
+                <td style="width: 248px">Age</td>
+                <td>
+                    <asp:TextBox ID="textAge" runat="server" Width="272px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 235px">&nbsp;</td>
+                <td style="width: 248px">About</td>
+                <td>
+                    <asp:TextBox ID="textAbout" runat="server" Width="272px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 235px">&nbsp;</td>
+                <td style="width: 248px">Course </td>
+                <td>
+                    <asp:DropDownList ID="crs_list" runat="server" DataSourceID="crs_id" DataTextField="course_name" DataValueField="ID" Width="278px">
+                    </asp:DropDownList>
+                    <asp:SqlDataSource ID="crs_id" runat="server" ConnectionString="<%$ ConnectionStrings:test-mhConnectionString %>" SelectCommand="SELECT * FROM [course]"></asp:SqlDataSource>
+                </td>
+            </tr>
+            
+        </table>
 
-        protected void InsertStudent(object sender, EventArgs e)
-        {
-            int id = int.Parse(textID.Text);
-            string name = textName.Text;
-            int age = int.Parse(textAge.Text);
-            string about = textAbout.Text;
-            int courseID = int.Parse(crs_list.SelectedValue);
+    </div>
+    <div class="text-center">
 
-            Class1  student = new Class1();
-            student.SaveData(id,name,age,about,courseID);
-            BindGrid();
-        }
+        <br />
+        <br />
+        <asp:Button ID="insertStudent" runat="server" OnClick="InsertStudent" Text="Insert " />
+        <asp:Button ID="updateStudent" runat="server" OnClick="UpdateStudent" Text="Update" />
+        <asp:Button ID="deleteStudent" runat="server" OnClick="DeleteStudent" Text="Delete" />
+        <br />
+        <br />
 
-        protected void UpdateStudent(object sender, EventArgs e)
-        {
-            int id = int.Parse(textID.Text);
-            string name = textName.Text;
-            int age = int.Parse(textAge.Text);
-            string about = textAbout.Text;
-            int courseID = int.Parse(crs_list.SelectedValue);
+    </div>
+    <div>
 
-            Class1 student = new Class1();
-            student.UpdateStudent(id, name, age, about, courseID);
-            BindGrid();
-        }
+        <asp:GridView ID="GridView1" runat="server" Width="1004px">
+        </asp:GridView>
 
-        protected void DeleteStudent(object sender, EventArgs e)
-        {
-            int id = int.Parse(textID.Text);
-            Class1 student = new Class1();
-            student.DeleteStudent(id);   
-            BindGrid();
-        }
-    }
-}
+    </div>
+
+</asp:Content>
