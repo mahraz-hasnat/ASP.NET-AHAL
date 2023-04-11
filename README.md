@@ -1,5 +1,5 @@
 # ASP.NET Practicals for Web Application
-### This is a simple project about student and course where we can do CRUD Operations. The goal is to learn CRUD Operations using C#.NET , ASP.NET Framework.
+### This is a simple project about student and course where we can do CRUD Operations. The goal is to learn CRUD Operations using C#, ASP.NET Framework.
 
 Run this project by following 👇👇
 - Install and Setup Visual Studio
