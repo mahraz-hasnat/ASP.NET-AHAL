@@ -1,11 +1,11 @@
+
+using AHS.Core.Framework;
+using AHS.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using static System.Net.Mime.MediaTypeNames;
+using AHAL.StudentCourse.BO;
 
 namespace WebApplication2
 {
@@ -32,12 +32,34 @@ namespace WebApplication2
 
         protected void insert_course_Click(object sender, EventArgs e)
         {
-            int crsID = int.Parse(text_crsID.Text);
-            string crsName = text_crsName.Text;
-            string crsInstructor = text_crsInstructor.Text;
-            int crsCredit = int.Parse(text_credit.Text);
-            Class1 course = new Class1();
-            course.InsertCourse(crsID, crsName, crsInstructor, crsCredit);
+            //int crsID = int.Parse(text_crsID.Text);
+            //string crsName = text_crsName.Text;
+            //string crsInstructor = text_crsInstructor.Text;
+            //int crsCredit = int.Parse(text_credit.Text);
+            Course course = new Course();
+            if(text_crsID.Text != "")
+            {
+                course.ID = int.Parse(text_crsID.Text);
+                course = course.GetData();
+            }
+            if (course == null)
+            {
+                course = new Course();
+            }
+
+            course.course_instructor = text_crsInstructor.Text;
+            course.course_name = text_crsName.Text;
+            course.credit = int.Parse(text_credit.Text);
+            course.Save();
+            BindGrid();
+        }
+
+        protected void delete_course_Click(object sender, EventArgs e)
+        {
+            //int crsID = int.Parse(text_crsID.Text);
+            Course course = new Course();
+            course.ID = int.Parse(text_crsID.Text);
+            course.Delete();
             BindGrid();
         }
     }
