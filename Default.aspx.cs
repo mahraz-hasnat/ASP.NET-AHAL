@@ -28,12 +28,6 @@ namespace WebApplication2
         protected void InsertStudent(object sender, EventArgs e)
         {
             Student student = new Student();
-            if (textID.Text != "")
-            {
-                student.ID = int.Parse(textID.Text);
-                student = student.GetData();
-            }
-
             if (student == null)
             {
                 student = new Student();
@@ -42,7 +36,7 @@ namespace WebApplication2
             student.name = textName.Text;
             student.age = int.Parse(textAge.Text);
             student.about = textAbout.Text;
-            student.course_id = int.Parse(crs_list.SelectedValue); ; //confusion.
+            student.course_id = int.Parse(crs_list.SelectedValue); //confusion on : student.cs -> course_id ,course
             student.Save();
             BindGrid();
         }
@@ -60,25 +54,21 @@ namespace WebApplication2
             {
                 string message = "Enter an available student id to update";
                 ClientScript.RegisterStartupScript(this.GetType(), "myalert", "alert('" + message + "');", true);
-
             }
 
-            int id = int.Parse(textID.Text);
-            string name = textName.Text;
-            int age = int.Parse(textAge.Text);
-            string about = textAbout.Text;
-            int courseID = int.Parse(crs_list.SelectedValue);
-
-            Class1 std = new Class1();
-            std.UpdateStudent(id, name, age, about, courseID);
+            student.name = textName.Text;
+            student.age = int.Parse(textAge.Text);
+            student.about = textAbout.Text;
+            student.course_id = int.Parse(crs_list.SelectedValue);
+            student.Save();
             BindGrid();
         }
 
         protected void DeleteStudent(object sender, EventArgs e)
         {
-            int id = int.Parse(textID.Text);
-            Class1 student = new Class1();
-            student.DeleteStudent(id);
+            Student std = new Student(); 
+            std.ID = int.Parse(textID.Text);
+            std.Delete();
             BindGrid();
         }
     }
